@@ -1,0 +1,365 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Dummy Insurance Company API",
+    "description" : "API for managing insurance policies and claims",
+    "termsOfService" : "http://dummyinsurance.com/terms/",
+    "contact" : {
+      "email" : "support@dummyinsurance.com"
+    },
+    "license" : {
+      "name" : "MIT",
+      "url" : "http://opensource.org/licenses/MIT"
+    },
+    "version" : "1.0.1"
+  },
+  "servers" : [ {
+    "url" : "https://api.dummyinsurance.com/v1"
+  } ],
+  "tags" : [ {
+    "name" : "policy",
+    "description" : "Operations related to insurance policies"
+  }, {
+    "name" : "claim",
+    "description" : "Operations related to insurance claims"
+  } ],
+  "paths" : {
+    "/policies" : {
+      "get" : {
+        "tags" : [ "policy" ],
+        "summary" : "Retrieve all insurance policies",
+        "operationId" : "getAllPolicies",
+        "responses" : {
+          "200" : {
+            "description" : "A list of insurance policies",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Policy"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "policy" ],
+        "summary" : "Create a new insurance policy",
+        "operationId" : "createPolicy",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Policy"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Policy created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Policy"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/{policyId}" : {
+      "get" : {
+        "tags" : [ "policy" ],
+        "summary" : "Retrieve a specific insurance policy",
+        "operationId" : "getPolicyById",
+        "parameters" : [ {
+          "name" : "policyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A specific insurance policy",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Policy"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Policy not found"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "policy" ],
+        "summary" : "Update an existing insurance policy",
+        "operationId" : "updatePolicy",
+        "parameters" : [ {
+          "name" : "policyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Policy"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Policy updated successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Policy"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Policy not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "policy" ],
+        "summary" : "Delete an insurance policy",
+        "operationId" : "deletePolicy",
+        "parameters" : [ {
+          "name" : "policyId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Policy deleted successfully"
+          },
+          "404" : {
+            "description" : "Policy not found"
+          }
+        }
+      }
+    },
+    "/claims" : {
+      "get" : {
+        "tags" : [ "claim" ],
+        "summary" : "Retrieve all insurance claims",
+        "operationId" : "getAllClaims",
+        "responses" : {
+          "200" : {
+            "description" : "A list of insurance claims",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "claim" ],
+        "summary" : "Create a new insurance claim",
+        "operationId" : "createClaim",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Claim created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Claim"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/claims/{claimId}" : {
+      "get" : {
+        "tags" : [ "claim" ],
+        "summary" : "Retrieve a specific insurance claim",
+        "operationId" : "getClaimById",
+        "parameters" : [ {
+          "name" : "claimId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A specific insurance claim",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Claim"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Claim not found"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "claim" ],
+        "summary" : "Update an existing insurance claim",
+        "operationId" : "updateClaim",
+        "parameters" : [ {
+          "name" : "claimId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Claim updated successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Claim"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Claim not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "claim" ],
+        "summary" : "Delete an insurance claim",
+        "operationId" : "deleteClaim",
+        "parameters" : [ {
+          "name" : "claimId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Claim deleted successfully"
+          },
+          "404" : {
+            "description" : "Claim not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Policy" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "premium" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "coverageAmount" : {
+            "type" : "number",
+            "format" : "float"
+          }
+        }
+      },
+      "Claim" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "policyId" : {
+            "type" : "string"
+          },
+          "amountClaimed" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "pending", "approved", "denied" ]
+          },
+          "dateFiled" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      }
+    }
+  }
+}
